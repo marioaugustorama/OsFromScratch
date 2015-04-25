@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
 	close(bdisk);
 
 	printf("\n * Setando como boot file");
-	bufb[511]=0x55;
-	bufb[512]=0xAA;
+	bufb[510]=0x55;
+	bufb[511]=0xAA;
 	printf("\n * Assinatura de boot 0x55AA gravado");
 	fdisk = open(argv[2],O_RDWR);
 	lseek(fdisk,0,SEEK_SET);
