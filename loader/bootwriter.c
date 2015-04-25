@@ -1,3 +1,6 @@
+#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -5,6 +8,7 @@ int main(int argc, char *argv[])
 {
 	char bufb[512];
 	int fdisk;
+	int bdisk;
 	
 	if(argc<3) {
 		printf("\nBoot Writer\n");
@@ -13,20 +17,21 @@ int main(int argc, char *argv[])
 	}
 
 	printf("\n\n * Abrindo boot sector");
-	bdisk = open(argv[1], O_RDONLY);
+	bdisk = open(argv[1], O_CREAT | O_RDONLY);
 	printf("\n * OK");
 	read(bdisk,bufb,510);
 	close(bdisk);
 
 	printf("\n * Setando como boot file");
-	bufb[510]=0x55;
-	bufb[511]=0xAA;
-	printf("\n * Assinatura de boot 0x55AA gravado...");
+	bufb[511]=0x55;
+	bufb[512]=0xAA;
+	printf("\n * Assinatura de boot 0x55AA gravado");
 	fdisk = open(argv[2],O_RDWR);
-	lseek(fdisk,0,SEEK_SET);
+	lseek(fdisk,0,SEEK_CUR);
 	write(fdisk,bufb,512);
-	printf("\n * OK .. Bootsector gravado com sucesso...\n\n");
+	printf("\n * OK .. Bootsector gravado com sucesso\n\n");
 	close(fdisk);
-}
+
+	}
 	
 
