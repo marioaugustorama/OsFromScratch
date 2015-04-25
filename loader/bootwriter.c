@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -5,6 +7,7 @@ int main(int argc, char *argv[])
 {
 	char bufb[512];
 	int fdisk;
+	int bdisk;
 	
 	if(argc<3) {
 		printf("\nBoot Writer\n");
