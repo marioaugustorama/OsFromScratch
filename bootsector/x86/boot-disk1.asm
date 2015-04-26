@@ -46,4 +46,5 @@ loaderror db 'Error: Invalid Disk ... ',13,10,0
 
 times 510-($-$$) db 0
 
+dw 0xaa55
 

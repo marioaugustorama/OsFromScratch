@@ -7,4 +7,4 @@ bootwriter.o: bootwriter.c
 	gcc -c $<
 
 clean:
-	rm bootwriter.o bootwriter
+	rm *.o bootwriter *.bin *.img
